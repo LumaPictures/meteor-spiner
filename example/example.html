@@ -1,0 +1,63 @@
+<head>
+    <title>module-model</title>
+</head>
+
+<body>
+    {{> users }}
+</body>
+
+<template name="users">
+    <strong>Users</strong>
+    <pre>Count : {{count}}</pre>
+    <ul>
+        {{#each users }}
+        {{> user }}
+        <hr />
+        {{/each}}
+    </ul>
+</template>
+
+<template name="user">
+    <li>
+        <ul>
+            <li>username : {{username}}</li>
+            <li>_id : {{_id}}</li>
+            <li>id : {{id}}</li>
+            <li>
+                <strong>Tweets</strong>
+                {{#each tweets}}
+                {{> tweet }}
+                {{/each}}
+            </li>
+            <li>
+                <strong>Followers</strong>
+                {{#each followers}}
+                {{> follow_user }}
+                {{/each}}
+            </li>
+            <li>
+                <strong>Following</strong>
+                {{#each following}}
+                {{> follow_user }}
+                {{/each}}
+            </li>
+        </ul>
+    </li>
+</template>
+
+<template name="tweet">
+    <ul>
+        <li>id : {{id}}</li>
+        <li>user_id : {{user_id}}</li>
+        <li>content : <pre>{{content}}</pre></li>
+    </ul>
+</template>
+
+<template name="follow_user">
+    <ul>
+        <li>id : {{id}}</li>
+        <li>username : {{username}}</li>
+        <li>_pivot_followee : {{_pivot_followee}}</li>
+        <li>_pivot_follower : {{_pivot_follower}}</li>
+    </ul>
+</template>

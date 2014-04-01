@@ -1,0 +1,16 @@
+{
+  "name": "module-model",
+  "description": "A reactive model and builds structured JSON from PostgreSQL Notifications",
+  "homepage": "https://github.com/lumapictures/module-model",
+  "author": "Austin Rivas <austinrivas@gmail.com> (https://github.com/austinrivas)",
+  "version": "0.0.1",
+  "git": "https://github.com/lumapictures/module-model",
+  "packages": {
+    "meteor-postgres": {
+      "git": "https://github.com/austinrivas/meteor-postgres"
+    },
+    "module-mediator": {
+      "git": "https://github.com/lumapictures/module-mediator"
+    }
+  }
+}
