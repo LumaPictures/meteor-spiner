@@ -3,19 +3,17 @@ Package.describe({
 });
 
 Package.on_use(function (api, where) {
-  Npm.depends({
-    // [SQL ORM based on Backbone](http://bookshelfjs.org)
-    bookshelf: '0.6.8'
-  });
 
   api.use([
-    'meteor-postgres'
+    'postgresql',
+    'npm',
+    'bookshelf'
   ], ['server']);
 
   api.use([
     'underscore',
     'coffeescript',
-    'module-mediator'
+    'mixen'
   ], ['client', 'server']);
 
   api.add_files(['model.coffee'], ['client', 'server']);

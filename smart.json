@@ -6,11 +6,9 @@
   "version": "0.0.1",
   "git": "https://github.com/lumapictures/module-model",
   "packages": {
-    "meteor-postgres": {
-      "git": "https://github.com/austinrivas/meteor-postgres"
-    },
-    "module-mediator": {
-      "git": "https://github.com/lumapictures/module-mediator"
-    }
+    "postgresql": {},
+    "bookshelf": {},
+    "npm": {},
+    "mixen": {}
   }
 }
