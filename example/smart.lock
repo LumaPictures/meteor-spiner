@@ -2,11 +2,19 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "bookshelf": {},
-      "npm": {},
-      "mixen": {}
+      "module-model": {
+        "path": ".."
+      }
     },
     "packages": {
+      "module-model": {
+        "path": ".."
+      },
+      "postgresql": {
+        "git": "https://github.com/austinrivas/meteor-postgresql",
+        "tag": "v2.11.2",
+        "commit": "b5f682486e5fa03c94c30fc36043a24d31d31745"
+      },
       "bookshelf": {
         "git": "https://github.com/austinrivas/meteor-bookshelf",
         "tag": "v0.6.8",
@@ -21,11 +29,6 @@
         "git": "https://github.com/austinrivas/meteor-mixen",
         "tag": "v0.0.3",
         "commit": "02869674a6218a21504a95800e4c5b2609fbedb5"
-      },
-      "postgresql": {
-        "git": "https://github.com/austinrivas/meteor-postgresql",
-        "tag": "v2.11.2",
-        "commit": "b5f682486e5fa03c94c30fc36043a24d31d31745"
       }
     }
   }

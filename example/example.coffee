@@ -2,7 +2,6 @@ Meteor.startup( ->
   if Meteor.isServer
     # create a persistent connection with postgres to monitor notifications
     Mediator.initialize "postgres://localhost/austin"
-
 )
 
 Meteor.startup( ->

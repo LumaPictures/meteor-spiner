@@ -7,7 +7,6 @@ standard-app-packages
 insecure
 coffeescript
 underscore
-bookshelf
-postgresql
+module-model
 npm
-mixen
+postgresql

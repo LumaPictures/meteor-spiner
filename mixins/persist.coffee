@@ -1,4 +1,4 @@
-class @Persist
+class Persist
   # Create a PostgreSQL record from a MongoDB document
   persist_create: (userId, doc) ->
     self = @

@@ -1,4 +1,4 @@
-class @AllowRules
+class AllowRules
   # by default writes are not allowed from the client directly to MongoDB
   # when a client inserts into a collection
   #   * userId is the user on the client

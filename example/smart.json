@@ -1,7 +1,7 @@
 {
   "packages": {
-    "bookshelf": {},
-    "npm": {},
-    "mixen": {}
+    "module-model": {
+      "path": ".."
+    }
   }
 }

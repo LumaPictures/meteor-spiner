@@ -1,5 +1,5 @@
 # parse notifications and route them to the correct method
-class @Notifications
+class Notifications
   # catch all notification handler, primary router
   handle_notification: ->
     self = @

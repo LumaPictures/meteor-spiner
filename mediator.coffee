@@ -42,7 +42,7 @@
         OWNER TO postgresql;
   ```
 ###
-class @Mediator
+class Mediator
   # You can add statements inside the class definition
   # which helps establish private scope (due to closures)
   # instance is defined as null to force correct scope
@@ -50,7 +50,7 @@ class @Mediator
   # Create a private class that we can initialize however
   # defined inside this scope to force the use of the
   # singleton class.
-  class Private extends Mixen( Logs )
+  class Private extends Mixen.Logs()
     constructor: (pgConString) ->
       self = @
       if Meteor.isServer
@@ -71,17 +71,16 @@ class @Mediator
         self.error "Mediator can only connect to PostgreSQL from the server."
       if Meteor.isServer
         # wrap the async connect method of pg.client to return syncronously
-        asyncConnect = Async.runSync( ( done ) ->
+        asyncConnect = Async.runSync ( done ) ->
           # Define PostgreSQL client
           client = new pg.Client self.pgConString
           # Create persistent connection to PostgreSQL
-          client.connect( (error) ->
+          client.connect (error) ->
             if error
               self.error "mediator:connect:error", error
             else
               done(null, client)
-          )
-        )
+
         self.client = asyncConnect.result
         # postgres notification event handler
         self.client.on "notification", (notification) ->
@@ -131,6 +130,6 @@ class @Mediator
 
   # This is a static method used to either retrieve the
   # instance or create a new one.
-  @initialize: (pgConString) ->
+  @initialize: (pgConString =  null) ->
     instance ?= new Private(pgConString)
 
