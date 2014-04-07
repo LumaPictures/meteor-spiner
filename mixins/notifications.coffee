@@ -8,20 +8,20 @@ class Notifications
       if notification = self.mediator.subscribe self.getTableName()
         channel = notification[0]
         notification = notification[1]
-        self.log "notification:channel:#{notification.channel}"
+        self.log "notification:channel:#{ notification.channel }"
         switch channel
-          when self.getTableName() then self.handle_self(notification)
-          else self.error "notification:channel:#{notification.channel}:uncaught", notification
+          when self.getTableName() then self.handle_self notification
+          else self.error "notification:channel:#{ notification.channel} :uncaught", notification
 
   handle_self: (notification) ->
     self = @
     if Meteor.isServer
-      self.log "notification:channel:#{notification.channel}:operation:#{notification.operation}"
+      self.log "notification:channel:#{ notification.channel }:operation:#{ notification.operation }"
       switch notification.operation
         when 'INSERT' then self.handle_insert notification
         when 'UPDATE' then self.handle_update notification
         when 'DELETE' then self.handle_delete notification
-        else self.error "notification:channel:#{notification.channel}:operation:#{notification.operation}:uncaught", notification
+        else self.error "notification:channel:#{ notification.channel }:operation:#{ notification.operation }:uncaught", notification
 
   handle_insert: (notification) ->
     self = @

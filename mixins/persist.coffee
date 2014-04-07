@@ -7,14 +7,18 @@ class Persist
     if Meteor.isServer
       # Calling save() persists the model to PostgreSQL
       # Notice that this only saves the model, not its related models
-      saveSync = self.saveSync doc
+      model = new self.model()
+      saveSync = model.saveSync doc
       unless saveSync.error
         # calling persist related retrieves the related fields for this document
         # it then persists the joined document to mongoDB
-        persistRelsted = self.persist_related saveSync.result
-        unless persistRelsted.error
-          self.log "persist:create:#{ doc._id }"
-          return true
+        fetchRelatedModel = model.fetchSync withRelated: model.relatedTables
+        unless fetchRelatedModel.error
+          self.meteorCollection.upsert { id: model.id }, { $set: model.toJSON() }
+          self.log "mongodb:#{ self.getTableName() }:upsert:#{ doc._id }"
+          # return true signals that the document has been sucessfully persisted
+          # TODO: still returns false because
+          return false
       return false
 
   # Insert a PostgreSQL model into MongoDB
@@ -27,6 +31,7 @@ class Persist
       _id = self.meteorCollection.upsert model.toJSON()
       self.log "#{ model.tableName }:persist:insert:#{ _id }"
 
+  # Upsert a PostgreSQL model into MongoDB
   persist_upsert: ( model ) ->
     self = @
     if Meteor.isClient
@@ -74,8 +79,7 @@ class Persist
       self.log "#{ self.model.getTableName() }:persist:collection"
       # upsert will create a new model if none exists or merge the model with the new model object
       # TODO : could the toArray() be the reason for the messed up models?
-      collection.toArray().forEach (model) ->
-        self.persist_upsert model
+      collection.toArray().forEach (model) -> self.persist_upsert model
 
   persist_related: ( model ) ->
     self = @
