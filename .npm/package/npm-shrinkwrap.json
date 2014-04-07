@@ -1,0 +1,81 @@
+{
+  "dependencies": {
+    "pg": {
+      "version": "2.11.1",
+      "dependencies": {
+        "generic-pool": {
+          "version": "2.0.3"
+        },
+        "buffer-writer": {
+          "version": "1.0.0"
+        },
+        "pgpass": {
+          "version": "0.0.1",
+          "dependencies": {
+            "split": {
+              "version": "0.2.10",
+              "dependencies": {
+                "through": {
+                  "version": "2.3.4"
+                }
+              }
+            }
+          }
+        },
+        "nan": {
+          "version": "0.6.0"
+        }
+      }
+    },
+    "bookshelf": {
+      "version": "0.6.8",
+      "dependencies": {
+        "backbone": {
+          "version": "1.1.0",
+          "dependencies": {
+            "underscore": {
+              "version": "1.6.0"
+            }
+          }
+        },
+        "inflection": {
+          "version": "1.2.7"
+        },
+        "trigger-then": {
+          "version": "0.1.1"
+        },
+        "knex": {
+          "version": "0.5.13",
+          "dependencies": {
+            "generic-pool-redux": {
+              "version": "0.1.0"
+            },
+            "optimist": {
+              "version": "0.6.1",
+              "dependencies": {
+                "wordwrap": {
+                  "version": "0.0.2"
+                },
+                "minimist": {
+                  "version": "0.0.8"
+                }
+              }
+            },
+            "mkdirp": {
+              "version": "0.3.5"
+            },
+            "colors": {
+              "version": "0.6.2"
+            }
+          }
+        },
+        "bluebird": {
+          "version": "1.0.8"
+        },
+        "lodash": {
+          "version": "2.4.1"
+        }
+      }
+    }
+  }
+}

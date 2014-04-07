@@ -3,18 +3,24 @@ Package.describe({
 });
 
 Package.on_use(function (api, where) {
-
-  api.use([
-    'postgresql',
-    'npm',
-    'bookshelf'
-  ], ['server']);
+  Npm.depends({
+    // [node-postgres connector](https://github.com/brianc/node-postgres)
+    pg: '2.11.1',
+    // [SQL ORM based on Backbone](http://bookshelfjs.org)
+    bookshelf: '0.6.8'
+  });
 
   api.use([
     'underscore',
     'coffeescript',
     'mixen'
   ], ['client', 'server']);
+
+  api.use([
+    'postgresql',
+    'npm',
+    'bookshelf'
+  ], ['server']);
 
   api.add_files([
     'mixins/logs.coffee',
@@ -38,7 +44,7 @@ Package.on_use(function (api, where) {
     'Model',
     'BookshelfCollection',
     'Collection'
-  ],['client', 'server']);
+  ], ['client', 'server']);
 });
 
 Package.on_test(function (api) {

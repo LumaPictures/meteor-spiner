@@ -12,13 +12,13 @@
       },
       "postgresql": {
         "git": "https://github.com/austinrivas/meteor-postgresql",
-        "tag": "v2.11.2",
-        "commit": "b5f682486e5fa03c94c30fc36043a24d31d31745"
+        "tag": "v2.11.3",
+        "commit": "f2d43b1a5b57c67ca1546c3a67535e89d791cb2b"
       },
       "bookshelf": {
         "git": "https://github.com/austinrivas/meteor-bookshelf",
-        "tag": "v0.6.8",
-        "commit": "38a8020fa411980700c6637532db0bbfabfb87dd"
+        "tag": "v0.6.10",
+        "commit": "3badaf958d164cdbc63cbbe6930a24738ec38267"
       },
       "npm": {
         "git": "https://github.com/arunoda/meteor-npm.git",

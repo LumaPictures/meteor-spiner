@@ -22,12 +22,3 @@ class @User extends Model
 class @UserCollection extends Collection
   model: User
   meteorCollection: UserMeteorCollection
-
-
-###### Views
-if Meteor.isClient
-  Template.users.count = ->
-    return Session.get "#{UserCollectionName}_count"
-
-  Template.users.users = ->
-    return UserMeteorCollection.find()

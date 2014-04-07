@@ -14,6 +14,7 @@ class Persist
         , (err)-> self.error "persist:create:#{doc._id}:error", err
         )
       return false
+
   # Insert a PostgreSQL model into MongoDB
   persist_insert: Meteor.bindEnvironment( (model) ->
     self = @
@@ -24,21 +25,22 @@ class Persist
       _id = self.meteorCollection.upsert model.toJSON()
       self.log "#{model.tableName}:persist:insert:#{_id}"
   )
-  persist_upsert: (model) ->
+
+  persist_upsert: ( model ) ->
     self = @
     if Meteor.isClient
       self.error "A document can only be persisted from the server."
     if Meteor.isServer
       # upsert the model into MongoDB
       self.meteorCollection.upsert { id: model.id }, { $set: model.toJSON() }
-      self.log "#{model.tableName}:persist:upsert:id:#{model.id}"
+      self.log "#{ model.tableName }:persist:upsert:id:#{ model.id }"
 
-  persist_update: (userId, docs, fields, modifier) ->
+  persist_update: ( userId, docs, fields, modifier ) ->
     self = @
     if Meteor.isClient
       self.error "A document can only be persisted from the server."
     if Meteor.isServer
-      self.log "#{self.model.getTableName()}:persist:update"
+      self.log "#{ self.model.getTableName() }:persist:update"
       self.log
         userId: userId
         docs: docs
@@ -54,6 +56,7 @@ class Persist
       self.log "#{self.model.getTableName()}:persist:remove"
       return false
   )
+
   persist_delete: Meteor.bindEnvironment( (model) ->
     self = @
     if Meteor.isClient
@@ -62,6 +65,7 @@ class Persist
       self.log "#{self.model.getTableName()}:persist:delete"
       self.meteorCollection.remove id: model.id
   )
+
   # Push a PostgreSQL collection into mongoDB
   persist_collection: (collection) ->
     self = @
@@ -70,7 +74,8 @@ class Persist
     if Meteor.isServer
       self.log "#{self.model.getTableName()}:persist:collection"
       # upsert will create a new model if none exists or merge the model with the new model object
-      collection.toArray().forEach (model) -> self.persist_upsert model
+      collection.toArray().forEach (model) ->
+        self.persist_upsert model
 
   persist_related: Meteor.bindEnvironment( (model) ->
     self = @
@@ -89,6 +94,7 @@ class Persist
           self.log err
         )
   )
+
   # Fetch the entire users table and its related fields and insert into MongoDB
   # once ensures that this method can only be called once
   # TODO : remove once in favor of smarter sync method
@@ -99,8 +105,8 @@ class Persist
     if Meteor.isServer
       # build a complete user collection with all related fields
       self.log "#{self.model.getTableName()}:collection:syncronize:start"
-      fetchRelatedCollection = self.fetchSync withRelated: self.model.relatedTables
+      fetchRelatedCollection = self.fetchSync withRelated: self.model.getRelatedTables()
       unless fetchRelatedCollection.error
         self.persist_collection fetchRelatedCollection.result
-        self.log "#{self.model.getTableName()}:collection:syncronize:end"
+        self.log "#{ self.model.getTableName() }:collection:syncronize:end"
   )
