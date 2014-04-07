@@ -1,13 +1,14 @@
-@TweetsCollectionName = 'tweets'
-@TweetsMeteorCollection = new Meteor.Collection TweetsCollectionName
-@TweetFields = ['id', 'user_id', 'content']
-@TweetRelated = ['users']
-
 # Tweet Model
-class @Tweet extends Model
+class @Tweet extends Mixen.Model()
   # PostgreSQL
-  tableName: TweetsCollectionName
+  tableName: 'tweets'
+  relatedTables: ['users']
+  schema: ['id', 'user_id', 'content']
   # belongs to a user
   users: ->
     if Meteor.isServer
       return @belongsTo User, 'user_id'
+
+class @TweetCollection extends Mixen.Collection()
+  model: Tweet
+  meteorCollection: new Meteor.Collection Tweet.getTableName()

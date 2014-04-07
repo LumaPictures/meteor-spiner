@@ -1,5 +1,5 @@
 # defined on server and client
-class @User extends Model
+class @User extends Mixen.Model()
   # PostgreSQL
   tableName: 'users'
   relatedTables: ['tweets', 'followers', 'following']
@@ -16,6 +16,6 @@ class @User extends Model
     if Meteor.isServer
       @belongsToMany User, 'followers', 'follower', 'followee'
 
-class @UserCollection extends Collection
+class @UserCollection extends Mixen.Collection()
   model: User
   meteorCollection: new Meteor.Collection User.getTableName()

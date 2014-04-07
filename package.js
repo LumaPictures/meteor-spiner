@@ -23,12 +23,12 @@ Package.on_use(function (api, where) {
   ], ['server']);
 
   api.add_files([
-    'mixins/logs.coffee',
-    'mixins/all.coffee',
-    'mixins/count.coffee',
-    'mixins/notifications.coffee',
-    'mixins/allowRules.coffee',
-    'mixins/persist.coffee'
+    'mixins/logs.mixin.coffee',
+    'mixins/all.mixin.coffee',
+    'mixins/count.mixin.coffee',
+    'mixins/notifications.mixin.coffee',
+    'mixins/allowRules.mixin.coffee',
+    'mixins/persist.mixin.coffee'
   ], ['client', 'server']);
 
   api.add_files([
@@ -52,5 +52,17 @@ Package.on_use(function (api, where) {
 });
 
 Package.on_test(function (api) {
-  api.use('module-model');
+  api.use([
+    'coffeescript',
+    'module-model',
+    'tinytest',
+    'test-helpers'
+  ], ['client', 'server']);
+
+  api.add_files([
+    'tests/mediator.test.coffee',
+    'tests/mixins.test.coffee',
+    'tests/model.test.coffee',
+    'tests/collection.test.coffee'
+  ], ['client', 'server']);
 });

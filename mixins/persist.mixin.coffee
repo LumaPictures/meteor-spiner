@@ -17,7 +17,7 @@ class Persist
           self.meteorCollection.upsert { id: model.id }, { $set: model.toJSON() }
           self.log "mongodb:#{ self.getTableName() }:upsert:#{ doc._id }"
           # return true signals that the document has been sucessfully persisted
-          # TODO: still returns false because
+          # TODO: still returns false because otherwise a duplicate doc is created
           return false
       return false
 
@@ -60,6 +60,9 @@ class Persist
       self.error "A document can only be persisted from the server."
     if Meteor.isServer
       self.log "#{ self.model.getTableName() }:persist:remove"
+      self.log
+        userId: userId
+        docs: docs
       return false
 
   persist_delete: ( model ) ->
@@ -95,7 +98,7 @@ class Persist
   # Fetch the entire users table and its related fields and insert into MongoDB
   # once ensures that this method can only be called once
   # TODO : remove once in favor of smarter sync method
-  syncronize_collection: _.once ->
+  syncronize_collection: ->
     self = @
     if Meteor.isClient
       self.error "A collection can only be sync'd from the server."
