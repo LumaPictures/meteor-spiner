@@ -39,7 +39,7 @@ class BookshelfModel extends Bookshelf.PostgreSQL.Model
         .then ( result, error ) ->
           # handle errors in the promise
           if error
-            self.error "#{ self.getTableName() }:collection:fetch:error", error
+            self.error "#{ self.getTableName() }:model:fetch:error", error
           # done terminates the fiber and returns to the syncronous method
           done error, result
 
@@ -70,7 +70,7 @@ Mixen.Model = ( modules... ) ->
 
 # Create a base Collection Mixen alias
 Mixen.Collection = ( modules... ) ->
-  Mixen modules..., AllowRules, Notifications, Persist, BookshelfCollection, Mixen.Logs()
+  Mixen modules..., AllowRules, Notifications, Persist, BookshelfCollection, Count, All, Mixen.Logs()
 
 # mixin that provides methods for get related fields from PostgreSQL, save to PostgreSQL, and some backbone utilities
 class Model extends Mixen.Model()

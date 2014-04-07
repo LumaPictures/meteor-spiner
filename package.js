@@ -24,6 +24,8 @@ Package.on_use(function (api, where) {
 
   api.add_files([
     'mixins/logs.coffee',
+    'mixins/all.coffee',
+    'mixins/count.coffee',
     'mixins/notifications.coffee',
     'mixins/allowRules.coffee',
     'mixins/persist.coffee'
@@ -36,6 +38,8 @@ Package.on_use(function (api, where) {
 
   api.export([
     'Logs',
+    'All',
+    'Count',
     'Notifications',
     'AllowRules',
     'Persist',
