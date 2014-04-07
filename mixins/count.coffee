@@ -31,14 +31,14 @@ class Count
     self = @
     if Meteor.isClient
       # set the default message for when the subcription is uninitialized
-      Session.setDefault "#{self.getTableName()}_count", 'Waiting on Subsription'
+      Session.setDefault "#{ self.getTableName() }_count", 'Waiting on Subsription'
       # setup <model.tableName>.count collection
       if self.count is undefined
-        self.count = new Meteor.Collection "#{self.model.getTableName()}-count"
+        self.count = new Meteor.Collection "#{ self.model.getTableName() }-count"
       # subscribe to <model.tableName>_count reactive publication
-      Meteor.subscribe "#{self.getTableName()}_count"
+      Meteor.subscribe "#{ self.getTableName() }_count"
       Deps.autorun (->
         models = self.count.findOne()
         unless models is undefined
-          Session.set "#{self.getTableName()}_count", models.count
+          Session.set "#{ self.getTableName() }_count", models.count
       )

@@ -1,12 +1,9 @@
-@UserCollectionName = 'users'
-@UserMeteorCollection = new Meteor.Collection UserCollectionName
-@UserFields = ['id', 'username']
-
 # defined on server and client
 class @User extends Model
   # PostgreSQL
-  tableName: UserCollectionName
+  tableName: 'users'
   relatedTables: ['tweets', 'followers', 'following']
+  schema: ['id', 'username']
   # used for picking the appropriate fields for model.save()
   tweets: ->
     if Meteor.isServer
@@ -21,4 +18,4 @@ class @User extends Model
 
 class @UserCollection extends Collection
   model: User
-  meteorCollection: UserMeteorCollection
+  meteorCollection: new Meteor.Collection User.getTableName()

@@ -24,6 +24,21 @@ if Meteor.isClient
 
 # wrap Bookshelf to provide syncronous db query methods
 class BookshelfModel extends Bookshelf.PostgreSQL.Model
+  saveSync: ( doc ) ->
+    self = @
+    if Meteor.isClient
+      self.error "BookshelfModel.saveSync() can only be called on the server."
+    if Meteor.isServer
+      # Async is provided by arunoda's awesome `npm` package
+      # runSync blocks this fiber until execution is complete
+      Async.runSync ( done ) ->
+        new self().save _.pick( doc, self.schema )
+        # Once the model is saved return the fiber
+        .then ( resutl, error ) ->
+          if error
+            self.error "persist:create:#{ doc._id }:error", error
+          done error, result
+
   # wraps the asyncronous fetch method to run in a syncronous fiber
   fetchSync: ( options ) ->
     self = @
@@ -66,11 +81,17 @@ class BookshelfCollection extends Bookshelf.PostgreSQL.Collection
 
 # Create a base Model Mixen alias
 Mixen.Model = ( modules... ) ->
-  Mixen modules..., BookshelfModel, Mixen.Logs()
+  if Meteor.isServer
+    return Mixen modules..., BookshelfModel, Mixen.Logs()
+  if Meteor.isClient
+    return Mixen modules..., Mixen.Logs()
 
 # Create a base Collection Mixen alias
 Mixen.Collection = ( modules... ) ->
-  Mixen modules..., AllowRules, Notifications, Persist, BookshelfCollection, Count, All, Mixen.Logs()
+  if Meteor.isServer
+    return Mixen modules..., AllowRules, Notifications, Persist, Count, All, Mixen.Logs(), BookshelfCollection
+  if Meteor.isClient
+    return Mixen modules..., AllowRules, Notifications, Persist, Count, All, Mixen.Logs()
 
 # mixin that provides methods for get related fields from PostgreSQL, save to PostgreSQL, and some backbone utilities
 class Model extends Mixen.Model()
@@ -82,6 +103,10 @@ class Model extends Mixen.Model()
   @getRelatedTables: ->
     self = @
     return new self().relatedTables
+  # static access to the fields instance property
+  @getSchema: ->
+    self = @
+    return new self().schema
 
 class Collection extends Mixen.Collection()
   # create collection with all its mixins and setup for app
@@ -103,6 +128,15 @@ class Collection extends Mixen.Collection()
   getTableName: ->
     self = @
     self.model.getTableName()
+
+  # access to the relatedTables model instance property
+  getRelatedTables: ->
+    self = @
+    self.model.getRelatedTables()
+  # access to the schema model instance property
+  getSchema: ->
+    self = @
+    self.model.getSchema()
 
   # set the method to run for each collection operation
   # each method returns true or false

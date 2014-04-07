@@ -7,12 +7,14 @@ class Persist
     if Meteor.isServer
       # Calling save() persists the model to PostgreSQL
       # Notice that this only saves the model, not its related models
-      self.log "persist:create:#{ doc._id }"
-      new self.model().save _.pick(doc, UserFields)
-      # Once the model is saved then insert to mongo
-      .then( self.persist_related
-        , (err)-> self.error "persist:create:#{doc._id}:error", err
-        )
+      saveSync = self.saveSync doc
+      unless saveSync.error
+        # calling persist related retrieves the related fields for this document
+        # it then persists the joined document to mongoDB
+        persistRelsted = self.persist_related saveSync.result
+        unless persistRelsted.error
+          self.log "persist:create:#{ doc._id }"
+          return true
       return false
 
   # Insert a PostgreSQL model into MongoDB
