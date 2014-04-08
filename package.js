@@ -33,7 +33,9 @@ Package.on_use(function (api, where) {
 
   api.add_files([
     'mediator.coffee',
-    'model.coffee'
+    'bookshelf.coffee',
+    'model.coffee',
+    'collection.coffee'
   ], ['client', 'server']);
 
   api.export([
@@ -54,6 +56,8 @@ Package.on_use(function (api, where) {
 Package.on_test(function (api) {
   api.use([
     'coffeescript',
+    'postgresql',
+    'npm',
     'module-model',
     'tinytest',
     'test-helpers'
@@ -61,6 +65,7 @@ Package.on_test(function (api) {
 
   api.add_files([
     'tests/mediator.test.coffee',
+    'tests/bookshelf.test.coffee',
     'tests/mixins.test.coffee',
     'tests/model.test.coffee',
     'tests/collection.test.coffee'
