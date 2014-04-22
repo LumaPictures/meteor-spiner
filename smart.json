@@ -1,10 +1,10 @@
 {
-  "name": "module-model",
-  "description": "A reactive model and builds structured JSON from PostgreSQL Notifications",
-  "homepage": "https://github.com/lumapictures/module-model",
+  "name": "luma-api",
+  "description": "A reactive REST API and builds structured JSON from PostgreSQL Notifications",
+  "homepage": "https://github.com/lumapictures/luma-api",
   "author": "Austin Rivas <austinrivas@gmail.com> (https://github.com/austinrivas)",
   "version": "0.0.1",
-  "git": "https://github.com/lumapictures/module-model",
+  "git": "https://github.com/lumapictures/luma-api",
   "packages": {
     "postgresql": {},
     "bookshelf": {},

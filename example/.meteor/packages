@@ -7,7 +7,4 @@ standard-app-packages
 insecure
 coffeescript
 underscore
-npm
-postgresql
-bookshelf
-module-model
+luma-api

@@ -2,12 +2,12 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "module-model": {
+      "luma-api": {
         "path": ".."
       }
     },
     "packages": {
-      "module-model": {
+      "luma-api": {
         "path": ".."
       },
       "postgresql": {

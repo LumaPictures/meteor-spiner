@@ -1,5 +1,5 @@
 Package.describe({
-  summary: "A reactive model that builds structured JSON from PostgreSQL Records"
+  summary: "A reactive REST API that builds structured JSON from PostgreSQL Records"
 });
 
 Package.on_use(function (api, where) {
@@ -58,7 +58,7 @@ Package.on_test(function (api) {
     'coffeescript',
     'postgresql',
     'npm',
-    'module-model',
+    'luma-api',
     'tinytest',
     'test-helpers'
   ], ['client', 'server']);
