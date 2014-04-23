@@ -1,14 +1,14 @@
 FORMAT: 1A
 HOST: http://www.google.com
 
-# Notes API
-Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+# Meteor Spiner API
+A relational DB to Document two way transform API.
 
-# Group Notes
-Notes related resources of the **Notes API**
+# Group Shots
+Shots related resources of the **Meteor Spiner API**
 
-## Notes Collection [/notes]
-### List all Notes [GET]
+## Shots Collection [/notes]
+### List all Shots [GET]
 + Response 200 (application/json)
 
         [{
@@ -17,7 +17,7 @@ Notes related resources of the **Notes API**
           "id": 2, "title": "Pick-up posters from post-office"
         }]
 
-### Create a Note [POST]
+### Create a Shot [POST]
 + Request (application/json)
 
         { "title": "Buy cheese and bread for breakfast." }
@@ -26,7 +26,7 @@ Notes related resources of the **Notes API**
 
         { "id": 3, "title": "Buy cheese and bread for breakfast." }
 
-## Note [/notes/{id}]
+## Shot [/Shot/{id}]
 A single Note object with all its details
 
 + Parameters
@@ -43,5 +43,5 @@ A single Note object with all its details
 
             { "id": 2, "title": "Pick-up posters from post-office" }
 
-### Remove a Note [DELETE]
+### Remove a Shot [DELETE]
 + Response 204
